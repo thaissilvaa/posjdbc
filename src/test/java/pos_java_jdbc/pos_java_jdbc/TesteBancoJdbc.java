@@ -50,4 +50,16 @@ public class TesteBancoJdbc{
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void atualizarDados() {
+		UserPosDAO dao = new UserPosDAO();
+		try {
+			Userposjava user = dao.buscar(5L);
+			user.setNome("Marcos Atualiza");
+			dao.atualizar(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
