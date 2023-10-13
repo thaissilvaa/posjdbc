@@ -132,7 +132,7 @@ public class TelefonePosDAO {
 
 	public void deletar(Long id) {
 		try {
-			String sql = "delete from telefoneuser where id = " + id;
+			String sql = "delete from telefoneuser where usuariopessoa = " + id;
 			PreparedStatement delete = connection.prepareStatement(sql);
 			delete.execute();
 			connection.commit();

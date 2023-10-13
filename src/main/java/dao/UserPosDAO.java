@@ -90,6 +90,8 @@ public class UserPosDAO {
 
 	public void deletar(Long id) {
 		try {
+			TelefonePosDAO dao = new TelefonePosDAO();
+			dao.deletar(id);
 			String sql = "delete from userposjava where id = " + id;
 			PreparedStatement delete = connection.prepareStatement(sql);
 			delete.execute();

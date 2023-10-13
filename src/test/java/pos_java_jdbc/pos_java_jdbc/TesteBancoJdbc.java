@@ -143,7 +143,7 @@ public class TesteBancoJdbc{
 	public void deletarDados() {
 		UserPosDAO dao = new UserPosDAO();
 		try {
-			dao.deletar(7L);
+			dao.deletar(1L);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
