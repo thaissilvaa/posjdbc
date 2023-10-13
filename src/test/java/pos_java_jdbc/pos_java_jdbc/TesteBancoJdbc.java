@@ -7,6 +7,7 @@ import org.junit.Test;
 import conexaojdbc.SingleConnection;
 import dao.TelefonePosDAO;
 import dao.UserPosDAO;
+import model.BeanUserFone;
 import model.Telefoneuser;
 import model.Userposjava;
 
@@ -67,6 +68,19 @@ public class TesteBancoJdbc{
 	}
 	
 	@Test
+	public void listarTelefone() {
+		TelefonePosDAO dao = new TelefonePosDAO();
+		try {
+			List<BeanUserFone> list = dao.listarT();
+			for(BeanUserFone userposjava : list) {
+				System.out.println(userposjava);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
 	public void buscarDados() {
 		UserPosDAO dao = new UserPosDAO();
 		try {
@@ -83,6 +97,19 @@ public class TesteBancoJdbc{
 		try {
 			Telefoneuser user = dao.buscar(5L);
 			System.out.println(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void buscarTelefone() {
+		TelefonePosDAO dao = new TelefonePosDAO();
+		try {
+			List<BeanUserFone> list = dao.buscarT(1L);
+			for(BeanUserFone userposjava : list) {
+				System.out.println(userposjava);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

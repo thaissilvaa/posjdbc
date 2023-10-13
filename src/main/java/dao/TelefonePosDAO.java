@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.BeanUserFone;
 import model.Telefoneuser;
 
 public class TelefonePosDAO {
@@ -57,6 +58,24 @@ public class TelefonePosDAO {
 		return list;
 	}
 
+	public List<BeanUserFone> listarT() throws Exception {
+		List<BeanUserFone> list = new ArrayList<BeanUserFone>();
+
+		String sql = "select A.numero, B.nome, B.email from telefoneuser as A inner join userposjava as B on B.id = A.usuariopessoa";
+		PreparedStatement select = connection.prepareStatement(sql);
+		ResultSet resultado = select.executeQuery(sql);
+
+		while (resultado.next()) {
+			BeanUserFone user = new BeanUserFone();
+			user.setNumero(resultado.getString("numero"));
+			user.setNome(resultado.getString("nome"));
+			user.setEmail(resultado.getString("email"));
+			list.add(user);
+		}
+
+		return list;
+	}
+
 	public Telefoneuser buscar(Long id) throws Exception {
 		Telefoneuser user = new Telefoneuser();
 
@@ -73,11 +92,30 @@ public class TelefonePosDAO {
 
 		return user;
 	}
+	
+	public List<BeanUserFone> buscarT(Long id) throws Exception {
+		List<BeanUserFone> list = new ArrayList<BeanUserFone>();
+
+		String sql = "select A.numero, B.nome, B.email from telefoneuser as A inner join userposjava as B on B.id = A.usuariopessoa where A.usuariopessoa = " + id;
+		PreparedStatement select = connection.prepareStatement(sql);
+		ResultSet resultado = select.executeQuery(sql);
+
+		while (resultado.next()) {
+			BeanUserFone user = new BeanUserFone();
+			user.setNumero(resultado.getString("numero"));
+			user.setNome(resultado.getString("nome"));
+			user.setEmail(resultado.getString("email"));
+			list.add(user);
+		}
+
+		return list;
+	}
 
 	public void atualizar(Telefoneuser telefoneuser) throws SQLException {
 		try {
 			String sql = "update telefoneuser set tipo = '" + telefoneuser.getTipo() + "', numero = '"
-					+ telefoneuser.getNumero() + "', usuariopessoa = " + telefoneuser.getUsuariopessoa() + " where id = " + telefoneuser.getId();
+					+ telefoneuser.getNumero() + "', usuariopessoa = " + telefoneuser.getUsuariopessoa()
+					+ " where id = " + telefoneuser.getId();
 			PreparedStatement update = connection.prepareStatement(sql);
 			update.execute();
 			connection.commit();
